@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 )
@@ -9,7 +8,7 @@ import (
 const maxUploadSize = 2 * 1024 * 1024
 const uploadPath = "./tmp"
 
-func main() error {
+func main() {
 	http.HandleFunc("/upload", uploadFileHandler())
 
 	fs := http.FileServer(http.Dir(uploadPath))
