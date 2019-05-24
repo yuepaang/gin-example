@@ -30,7 +30,11 @@ func main() {
             }
         }
 
-        c.String(http.StatusOK, fmt.Sprintf("Uploaded successfully %d files", len(files)))
+        c.Header("Content-Type", "application/json")
+        c.JSON(http.StatusOK, gin.H {
+            "message": fmt.Sprintf("Uploaded successfully %d files", len(files)),
+        })
+        // c.String(http.StatusOK, fmt.Sprintf("Uploaded successfully %d files", len(files)))
     })
     router.Run(":5000")
 }
