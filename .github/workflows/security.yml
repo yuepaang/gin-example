@@ -1,0 +1,29 @@
+name: Security
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  schedule:
+    - cron: '0 3 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  gin-security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          check-latest: true
+      # The root contains three independent example programs. Build the Gin entry point.
+      - name: Verify dependencies
+        run: go mod verify
+      - name: Build Gin example
+        run: go build -mod=readonly -o "$RUNNER_TEMP/gin-example" main.go
+      - name: Check imported packages for vulnerabilities
+        run: go run golang.org/x/vuln/cmd/govulncheck@v1.9.0 -mode=binary -scan=package "$RUNNER_TEMP/gin-example"
