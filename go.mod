@@ -1,6 +1,6 @@
 module github.com/ypeng7/data-microservices
 
-go 1.27.3
+go 1.27.4
 
 require (
 	github.com/gin-gonic/gin v1.9.1

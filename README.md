@@ -3,7 +3,7 @@ Web services for data preprocessing
 
 ## Build and security checks
 
-Use Go 1.27.3 or newer, including the latest security patches. Run the Gin
+Use Go 1.27.4 or newer, including the latest security patches. Run the Gin
 example explicitly, since the repository root also contains two independent
 example programs (`staticserver.go` and `test.go`):
 
